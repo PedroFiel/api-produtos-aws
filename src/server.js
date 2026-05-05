@@ -1,15 +1,18 @@
-require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
+require('dotenv').config();
+const connectDB = require('./config/database');
 
 const app = express();
 
-app.use(cors());
+connectDB();
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.json({ mensagem: 'API Produtos rodando' });
+  res.send('API rodando');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(process.env.PORT, () => {
+  console.log(`Servidor rodando na porta ${process.env.PORT}`);
+});
+
