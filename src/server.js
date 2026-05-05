@@ -16,3 +16,8 @@ app.listen(process.env.PORT, () => {
   console.log(`Servidor rodando na porta ${process.env.PORT}`);
 });
 
+app.get('/test-db', async (req, res) => {
+  const Produto = require('./models/Produto');
+  const produtos = await Produto.find();
+  res.json(produtos);
+});
