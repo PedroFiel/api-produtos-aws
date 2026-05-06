@@ -4,14 +4,11 @@ exports.listar = async (req, res) => {
   try {
     const { page = 1, limit = 10, categoria } = req.query;
     const filtro = categoria ? { categoria } : {};
-
     const produtos = await Produto.find(filtro)
-      .limit(Number(limit))
-      .skip((Number(page) - 1) * Number(limit))
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
       .sort('-createdAt');
-
     const total = await Produto.countDocuments(filtro);
-
     res.json({ total, page: Number(page), produtos });
   } catch (error) {
     res.status(500).json({ erro: error.message });
