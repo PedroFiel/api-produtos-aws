@@ -8,6 +8,7 @@ connectDB();
 
 app.use(express.json());
 app.use('/api/produtos', require('./routes/produtoRoutes'));
+app.use('/api/auth', require('./routes/authRoutes'));
 
 app.get('/', (req, res) => {
   res.send('API rodando');
