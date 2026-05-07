@@ -1,21 +1,12 @@
-const router = require('express').Router();
+﻿const router = require('express').Router();
 const auth = require('../middlewares/authMiddleware');
-const validar = require('../middlewares/validarProduto'); // Importando sua validação
-const { 
-    listar, 
-    buscarPorId, 
-    criar, 
-    atualizar, // Sua função
-    deletar    // Sua função
-} = require('../controllers/produtoController');
+const { listar, buscarPorId, criar } = require('../controllers/produtoController');
 
-// Rotas públicas
-router.get('/', listar);
-router.get('/:id', buscarPorId);
+router.get('/', listar);                  // pública: lista produtos
+router.get('/:id', buscarPorId);          // pública: detalhe
+router.post('/', auth, criar);            // protegida: criar
 
-// Rotas protegidas (precisa de Token e passar na sua Validação)
-router.post('/', auth, validar, criar);
-router.put('/:id', auth, validar, atualizar); // Rota de atualização conectada
-router.delete('/:id', auth, deletar);          // Rota de deleção conectada
+// TODO Anie: router.put('/:id', auth, atualizar);
+// TODO Anie: router.delete('/:id', auth, deletar);
 
 module.exports = router;
