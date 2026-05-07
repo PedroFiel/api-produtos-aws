@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/produtos', require('./routes/produtoRoutes'));
 
 app.get('/', (req, res) => {
   res.send('API rodando');
@@ -31,5 +32,6 @@ app.listen(PORT, () => {
   console.log(`  ${base}/test-db`);
   console.log(`  ${base}/api/auth/register`);
   console.log(`  ${base}/api/auth/login`);
+  console.log(`  ${base}/api/produtos`);
   console.log('  /api/auth/* são POST (corpo JSON) — use Postman ou curl, não o clique direto no navegador.');
 });
